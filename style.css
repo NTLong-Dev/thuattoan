@@ -1,0 +1,39 @@
+div{
+    width: 200px;
+    text-align: center;
+    margin: 0 auto;
+    position: relative;
+    top: 200px;
+}
+.money{
+    margin-bottom: 10px;
+    width: 180px;
+    border-radius: 20px;
+    border: 3px solid black;
+    padding-left: 10px;
+}
+.tai{
+    background-color: red;
+    border: 3px solid black;
+    width: 50px;
+    height: 30px;
+    color: white;
+}
+.tai:hover , .xiu:hover ,.reset:hover{
+    cursor: pointer;
+    background-color: yellowgreen;
+}
+.reset{
+    background-color: blue;
+    border: 3px solid black;
+    width: 50px;
+    height: 30px;
+    color: white;
+}
+.xiu{
+    background-color: green;
+    border: 3px solid black;
+    width: 50px;
+    height: 30px;
+    color: white;
+}

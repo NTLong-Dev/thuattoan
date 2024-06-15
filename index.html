@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <label for="">Tổng Tiền: </label>
+        <p id="tongtien"></p>
+        <form action="#">
+            <input type="number" min="0" class="money" id="money" required>
+            <input type="button" value="Tài" class="tai" id="btntai">
+            <input type="button" value="Xỉu" class="xiu" id="btnxiu">
+            <input type="reset" class="reset" value="Reset" id="reset">
+        </form>
+        <p id="ketqua"></p>
+    </div>
+    <script>
+        const money = document.getElementById('money');
+        const btntai = document.getElementById('btntai');
+        const btnxiu = document.getElementById('btnxiu');
+        const kq = document.getElementById('ketqua');
+        const reset = document.getElementById('reset');
+        const tongtien = document.getElementById('tongtien');
+        
+        let tt = 10000;
+        tongtien.textContent = tt + " $";
+
+        function updateTotal(betAmount) {
+            if (isNaN(betAmount) || betAmount <= 0) {
+                alert("Bạn Chưa Nhập Tiền.");
+                return false;
+            }
+
+            if (betAmount > tt) {
+                alert("Bạn không đủ tiền.");
+                return false;
+            }
+
+            tt -= betAmount;
+            tongtien.textContent = tt + " $";
+            return true;
+        }
+
+        btntai.addEventListener("click", function() {
+            const betAmount = parseInt(money.value);
+            const so = Math.floor(Math.random() * 9) + 1; 
+            var a = [6, 7, 8, 9];
+            const sof = a[Math.floor(Math.random() * a.length)];
+            if (!updateTotal(betAmount)) return;
+
+            if (betAmount > 5000) {
+                kq.innerHTML = "Xỉu : " + sof;
+                return;
+            }
+
+            const ketqua = (so <= 5) ? "Xỉu" : "Tài";
+            kq.innerHTML = ketqua + " : " + so;
+            if (ketqua === "Tài") {
+                tt += betAmount * 2;
+                tongtien.textContent = tt + " $";
+            }
+
+            if (tt == 0) {
+                alert("Bạn Đã Hết Tiền.");
+            }
+        });
+
+        btnxiu.addEventListener("click", function() {
+            const betAmount = parseInt(money.value);
+            const so = Math.floor(Math.random() * 9) + 1; 
+            if (!updateTotal(betAmount)) return;
+            var a = [1, 2, 3, 4];
+            const sof = a[Math.floor(Math.random() * a.length)];
+            if (betAmount > 5000) {
+                kq.innerHTML = "Tài : " + sof;
+                return;
+            }
+
+            const ketqua = (so > 5) ? "Tài" : "Xỉu";
+            kq.innerHTML = ketqua + " : " + so;
+            if (ketqua === "Xỉu") {
+                tt += betAmount * 2;
+                tongtien.textContent = tt + " $";
+            }
+
+            if (tt == 0) {
+                alert("Bạn Đã Hết Tiền.");
+            }
+        });
+
+        reset.addEventListener("click", function() {
+            kq.innerHTML = "";
+            tt = 10000;
+            tongtien.textContent = tt + " $"; 
+        });
+    </script>
+</body>
+</html>
